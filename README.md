@@ -2,150 +2,238 @@
 
 Travel Adventures is a travel-themed website that I developed as part of my Web Programming coursework. I originally created the travel pages and the login and registration system as separate assignments. For this project, I brought them together into one application and added session-based authentication.
 
-I also wanted users to have something useful to do after logging in, rather than simply seeing a welcome message. To make the website more interactive, I added a feature that allows users to save destinations they are interested in visiting and manage their own travel wishlist.
+The main goal of this assignment was to use session variables to keep track of logged-in users, display their username on another page, and allow them to log out securely.
 
-## About the Website
-
-The website is designed around my interest in traveling and exploring new places. It includes information about different destinations, travel tips, and a simple account system.
-
-I tried to keep the design consistent throughout the website by using a teal, cream, and warm-sand color palette. I also retained the travel photographs, navigation, and layouts from my earlier assignments while incorporating the new functionality.
-
-The website includes the following pages:
-
-- **Home:** Introduces the website and its purpose.
-- **About:** Explains why I created Travel Adventures.
-- **Destinations:** Displays popular travel destinations and allows users to save their favorites.
-- **Travel Tips:** Shares useful information for planning trips.
-- **Register:** Allows new users to create an account.
-- **Login:** Allows existing users to sign in.
-- **My Profile:** Displays the logged-in user's username and saved destinations.
+I also extended the website with a **My Saved Places** feature, where users can save destinations they would like to visit. These selections are stored in MySQL and linked to individual user accounts.
 
 ## Features
 
-### User Registration and Login
+### 1. Travel Website
 
-Users can register by entering a username, email address, and password. Their account information is stored in a MySQL database.
+The website includes several pages that introduce visitors to different destinations and provide basic travel information.
 
-Passwords are not stored directly. Instead, the application uses salted PBKDF2 password hashing to store them more securely.
+- **Home:** The main landing page of Travel Adventures.
+- **About:** Information about the website and its purpose.
+- **Destinations:** Featured destinations with descriptions and images.
+- **Travel Tips:** Useful tips for planning trips and traveling.
 
-When a user logs in, the application checks the entered credentials against the database. If the details are correct, the user is redirected to their profile.
+The original travel-themed design has been maintained throughout the application, with consistent navigation and styling across pages.
 
-### Session-Based Authentication
+### 2. User Registration and Login
 
-The main requirement of this assignment was to use session variables to store user information after login.
+Users can create an account using a username, email address, and password.
 
-I implemented this using the `express-session` package in Node.js.
+Registration information is stored in a MySQL database. Passwords are protected using PBKDF2 hashing with a randomly generated salt rather than being stored as plain text.
 
-After a successful login, the application creates a session and stores the user's username and user ID. The username is then retrieved from the session and displayed on the My Profile page.
+Registered users can log in using their username and password. The server verifies their credentials before creating a session.
 
-The navigation bar also changes depending on whether the user is logged in.
+### 3. Session-Based Authentication
 
-- Visitors who are not logged in see **Login** and **Register**.
-- Logged-in users see **My Profile**, **Logout**, and a personalized greeting.
+Session management is implemented using the `express-session` package.
 
-The My Profile page is protected, so users cannot access it without logging in.
+After a successful login, the application stores the user's ID and username in a server-side session:
 
-### Logout Functionality
+```javascript
+req.session.user = {
+    userId: user.user_id,
+    username: user.username
+};
+```
 
-I added a logout route that destroys the active session and clears the session cookie.
+This allows the application to recognize the logged-in user when they navigate between pages without requiring them to log in again.
 
-After logging out, the user is redirected to the Login page. If they try to access My Profile again without logging in, they are redirected back to Login.
+The website also includes an `/api/session` endpoint, which the navigation system uses to check whether a user is currently logged in.
 
-This helped me understand how sessions can be used to control access to different parts of a website.
+Based on the session status, the navigation displays the appropriate links for guests or logged-in users.
 
-### Save Destinations
+### 4. User Profile Page
 
-Along with the session requirements, I added a personal travel wishlist feature.
+After logging in, users are redirected to the `/profile` page.
 
-The Destinations page currently includes four places:
+The profile page displays a personalized welcome message using the username stored in the active session.
 
-- San Francisco
-- New York City
-- Paris
-- Tokyo
+For example, a user who logs in with the username `traveler123` will see:
 
-Each destination has a card with a photograph, a short description, and a button to save it.
+**Welcome back, traveler123!**
 
-When a logged-in user clicks **Save to My Places**, the destination is added to their account. The button also changes to show that the place has already been saved.
+The username is retrieved from the session rather than being passed through the URL.
 
-Users can click the button again to remove a saved destination.
+The profile page is protected, meaning that users who are not logged in are redirected to the login page.
 
-If someone tries to save a destination without logging in, they are redirected to the Login page.
+### 5. Logout Functionality
 
-### My Saved Places
+A `/logout` endpoint allows users to end their session.
 
-The My Profile page includes a section called **My Saved Places**.
+When a user clicks the Logout link, the application destroys the active session, clears the session cookie, and redirects them to the login page.
 
-Here, users can view the destinations they have saved, see how many places are in their wishlist, and remove destinations they are no longer interested in.
+After logging out, the user can no longer access the protected profile page unless they log in again.
 
-The saved destinations are stored in MySQL and connected to each user's account through their user ID.
+### 6. My Saved Places
 
-This means the wishlist is not lost when the user logs out. When they log back in, their previously saved destinations are still available.
+I added a destination-saving feature to make the website more interactive and personalized.
 
-It also ensures that users can only view and manage their own saved places.
+Logged-in users can save destinations they are interested in visiting by clicking the heart-shaped Save button on a destination card.
+
+The available destinations include:
+
+- San Francisco, United States
+- New York City, United States
+- Paris, France
+- Tokyo, Japan
+
+Saved destinations appear under **My Saved Places** on the user's profile page.
+
+Users can also remove destinations from their saved list. The profile displays the total number of saved destinations.
+
+Each saved destination is associated with the user's account in MySQL, so users only see and manage their own selections.
+
+Visitors who are not logged in are prompted to log in before saving destinations.
 
 ## Technologies Used
 
 | Technology | Purpose |
 |---|---|
-| HTML | Structure of the website |
-| CSS | Styling, layouts, and responsive design |
+| HTML5 | Structure of the website |
+| CSS3 | Page layouts, styling, and responsive design |
 | JavaScript | Navigation updates and destination interactions |
-| Node.js | Running the backend application |
-| Express.js | Handling routes and requests |
-| express-session | Managing user sessions |
-| MySQL | Storing user accounts and saved destinations |
-| mysql2 | Connecting Node.js to MySQL |
-| PBKDF2 | Password hashing |
-| dotenv | Managing environment variables |
+| Node.js | Server-side JavaScript runtime |
+| Express.js | Routing and backend functionality |
+| express-session | User session management |
+| MySQL | Storage of registered users and saved destinations |
+| mysql2 | Communication between Node.js and MySQL |
+| dotenv | Loading environment variables |
+| Node.js Crypto | Password hashing and verification |
 
-## Database
+## Project Structure
+
+```text
+Travel-Adventures-WebApp/
+│
+├── public/
+│   ├── index.html
+│   ├── about.html
+│   ├── destinations.html
+│   ├── tips.html
+│   ├── login.html
+│   ├── register.html
+│   ├── style.css
+│   ├── auth.css
+│   ├── navigation.css
+│   ├── navigation.js
+│   ├── destinations.css
+│   └── destinations.js
+│
+├── server.js
+├── database.sql
+├── package.json
+├── package-lock.json
+├── .gitignore
+└── README.md
+```
+
+The `.env` file is created locally and excluded from GitHub because it contains database credentials and the session secret.
+
+## Database Design
 
 The application uses a MySQL database named `web_programming`.
 
-It contains two tables.
+The `database.sql` file contains the SQL statements needed to create the required database tables.
 
-**registered_users**
+### registered_users
 
-Stores account details, including the user ID, username, email, password hash, and account creation date.
+This table stores information about registered users.
 
-**saved_destinations**
+| Column | Description |
+|---|---|
+| user_id | Unique ID for each registered user |
+| username | Username used for login |
+| email | Registered email address |
+| password_hash | Salted and hashed password |
+| created_at | Account creation timestamp |
 
-Stores the destinations saved by users. Each saved destination is associated with the corresponding user ID.
+### saved_destinations
 
-I used a separate table for saved destinations so that each account could have its own wishlist without affecting other users.
+This table stores the destinations saved by individual users.
 
-The database structure is included in `database.sql`.
+| Column | Description |
+|---|---|
+| saved_id | Unique ID for each saved record |
+| user_id | ID of the user who saved the destination |
+| destination_code | Code identifying the destination |
+| saved_at | Date and time the destination was saved |
 
-## How to Run the Project
+The `user_id` column creates a relationship between `saved_destinations` and `registered_users`.
 
-### 1. Install the Requirements
+A unique constraint prevents the same user from saving the same destination multiple times.
+
+## How to Run the Project Locally
+
+### Step 1: Install the Required Software
 
 Make sure Node.js and MySQL are installed on your computer.
 
-### 2. Set Up the Database
+You will also need a code editor, such as Visual Studio Code, to view or modify the project files.
 
-Start MySQL and run the SQL statements provided in `database.sql`.
+### Step 2: Clone the Repository
 
-This creates the database and the required tables.
+Open a terminal and run:
 
-### 3. Configure Environment Variables
+```bash
+git clone https://github.com/AkshithaSanagarapu/Travel-Adventures-WebApp.git
+```
 
-Create a `.env` file using `.env.example` as a reference.
+Navigate into the project folder:
 
-Add the database connection details and a session secret.
+```bash
+cd Travel-Adventures-WebApp
+```
 
-The `.env` file should remain private and should not be uploaded to GitHub.
+### Step 3: Set Up the Database
 
-### 4. Install Dependencies
+Start your local MySQL server.
 
-Open the project folder in a terminal and run:
+Run the SQL statements provided in `database.sql` to create the `web_programming` database and its required tables.
+
+For example, from the project directory:
+
+```bash
+mysql -u root -p < database.sql
+```
+
+Enter your MySQL password when prompted.
+
+### Step 4: Configure Environment Variables
+
+Create a file named `.env` in the root directory of the project, alongside `server.js`.
+
+Add the following configuration:
+
+```env
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_mysql_password
+DB_NAME=web_programming
+DB_PORT=3306
+SESSION_SECRET=replace_with_a_long_random_secret
+```
+
+Replace `your_mysql_password` with your actual MySQL password.
+
+Replace the `SESSION_SECRET` placeholder with a long, randomly generated secret.
+
+The `.env` file is included in `.gitignore` so that sensitive credentials are not uploaded to GitHub.
+
+### Step 5: Install Dependencies
+
+Run:
 
 ```bash
 npm install
 ```
 
-### 5. Start the Server
+This installs the packages required by the application.
+
+### Step 6: Start the Server
 
 Run:
 
@@ -153,38 +241,117 @@ Run:
 npm start
 ```
 
-Once the database connects successfully, the website will be available at:
+If the database connection is successful, the terminal should display:
 
-`http://localhost:3000`
+```text
+Database connection established successfully!
+Server running at http://localhost:3000
+```
 
-## Testing the Application
+### Step 7: Open the Website
 
-I tested the website by going through the complete registration, login, and logout process.
+Open a web browser and visit:
 
-First, I logged in with an existing account and checked whether the username appeared on the My Profile page. I also verified that the navigation changed after login.
+http://localhost:3000
 
-Next, I logged out and tried opening the profile directly. The application redirected me to the Login page, confirming that the protected route was working.
+You can now explore the website, register an account, log in, and try the saved destinations feature.
 
-I also tested the saved destinations feature by adding places to my wishlist, viewing them on My Profile, and removing them. After logging out and logging back in, I checked that the remaining saved destinations were still available.
+## Testing the Session Variables
 
-Finally, I tested what happens when a user tries to save a destination without being logged in.
+The following steps demonstrate the main requirements of the assignment.
 
-These tests helped me verify that the session functionality and the destination wishlist were working together as expected.
+**Test 1: User Login and Session Creation**
 
-## What I Learned
+1. Open `/register.html` and create a new account, or use an existing registered account.
+2. Navigate to `/login.html`.
+3. Enter the registered username and password.
+4. Submit the login form.
+5. After successful authentication, the application creates a session and redirects the user to `/profile`.
 
-This project helped me understand how sessions work in a web application and how they can be used to maintain user information between different pages.
+**Expected Result:** The user is successfully logged in, and their username and user ID are stored in the session.
 
-I also gained more practice connecting a Node.js application to MySQL, handling database queries, protecting routes, and using JavaScript to update the website without reloading the page.
+**Test 2: Displaying the Username on Another Page**
 
-One of the more interesting parts was connecting the saved destinations feature to individual user accounts. It helped me see how authentication and database relationships can work together to create a more personalized experience.
+1. Log in to the application.
+2. Open `/profile`.
+3. Check the welcome message displayed on the page.
 
-Overall, I was able to build on my previous assignments and turn them into a more complete and interactive website.
+**Expected Result:** The profile displays the username retrieved from the active session.
 
-## Notes
+**Test 3: Session-Aware Navigation**
 
-This project was developed for coursework and is intended to run locally. It currently uses the default in-memory session store provided by `express-session`, which is not intended for production use.
+1. Open the website without logging in.
+2. Observe the navigation menu.
+3. Log in and return to the website.
+4. Observe how the navigation changes.
 
-The original Travel Adventures assignments have been kept separately, and this repository contains the combined and updated application.
+**Expected Result:** The navigation displays the appropriate login or profile options depending on the user's session status.
 
-Database credentials and other private environment variables are not included in the repository.
+**Test 4: Logout and Session Destruction**
+
+1. Log in to the website.
+2. Open the profile page.
+3. Click the Logout link.
+4. Try accessing `/profile` again.
+
+**Expected Result:** The session is destroyed, the user is redirected to the login page, and the protected profile is no longer accessible.
+
+**Test 5: Saving Destinations**
+
+1. Log in to the application.
+2. Open the Destinations page.
+3. Click Save on one or more destination cards.
+4. Navigate to the profile page.
+5. Check the My Saved Places section.
+6. Remove a destination and verify that the saved list updates.
+
+**Expected Result:** Saved destinations appear on the user's profile and are stored in the database. Removing a destination updates the user's saved list.
+
+## Important Backend Routes
+
+| Route | Method | Purpose |
+|---|---|---|
+| `/` | GET | Displays the homepage |
+| `/register` | POST | Registers a new user |
+| `/login` | POST | Authenticates a user and creates a session |
+| `/profile` | GET | Displays the protected profile page |
+| `/logout` | GET | Destroys the session and logs out the user |
+| `/api/session` | GET | Returns the current login status |
+| `/api/saved-destinations` | GET | Retrieves the user's saved destinations |
+| `/api/saved-destinations` | POST | Saves a destination |
+| `/api/saved-destinations/:code` | DELETE | Removes a saved destination |
+
+## Code Comments and Organization
+
+The source code includes comments explaining important parts of the application, particularly the backend logic and session management.
+
+In `server.js`, comments identify the session middleware, authentication process, session creation, protected routes, database operations, and logout functionality.
+
+The frontend JavaScript handles navigation and destination interactions, while the HTML and CSS files are organized around the website's pages and visual components.
+
+This separation makes the project easier to understand, maintain, and extend.
+
+## Additional Notes
+
+- The application uses Express's default in-memory session store, which is suitable for this local coursework project but is not intended for production deployment.
+- Passwords are stored using salted PBKDF2 hashes rather than plain text.
+- Database queries use parameter placeholders when handling user-supplied values.
+- Session information is maintained on the server, while the browser stores a session cookie.
+- Saved destinations are associated with individual accounts through their user IDs.
+- The `.env` file and `node_modules` directory are excluded from GitHub.
+
+## Assignment Information
+
+**Course:** Web Programming — Fall 2026
+
+**Assignment:** Using Session Variables for User Data
+
+**GitHub Repository:** https://github.com/AkshithaSanagarapu/Travel-Adventures-WebApp
+
+## Conclusion
+
+Through this assignment, I learned how session variables can be used to maintain user information across different pages of a website.
+
+By combining the existing login and registration system with Express sessions, I was able to create a personalized profile page, display the logged-in user's username, and implement logout functionality that ends the session.
+
+I also used the session information to connect the saved destinations feature to individual user accounts. This helped me understand how session management, backend routes, and database operations work together in a web application.
