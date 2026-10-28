@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Travel Adventures | Destinations</title>
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/navigation.css">
+    <link rel="stylesheet" href="/destinations.css">
+
+    <script src="/navigation.js" defer></script>
+    <script src="/destinations.js" defer></script>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Website heading -->
+        <header class="header">
+            <h1>Travel Adventures</h1>
+            <p class="subtitle">Explore. Experience. Remember.</p>
+        </header>
+
+        <!-- Shared navigation responds to login status -->
+        <div id="site-navigation"></div>
+
+        <main>
+
+            <!-- Original destination introduction -->
+            <section class="page-layout image-right">
+                <img
+                    class="page-image destination-image"
+                    src="/images/destinations.jpg"
+                    alt="San Francisco Bay Bridge and city skyline"
+                >
+
+                <div class="content-card">
+                    <p class="section-label">Discover New Places</p>
+                    <h2>Travel Destinations</h2>
+
+                    <p class="paragraph-one">
+                        There are many beautiful destinations around the
+                        world for travelers to explore. Every place offers
+                        something different, from famous landmarks and
+                        exciting cities to peaceful natural scenery.
+                        Exploring these places can provide travelers with
+                        unforgettable experiences.
+                    </p>
+
+                    <p class="paragraph-two">
+                        Some people enjoy visiting large cities filled with
+                        restaurants, museums, and entertainment, while others
+                        prefer beaches, mountains, or quiet countryside
+                        locations. The best destination depends on what a
+                        traveler enjoys doing. Trying different types of
+                        destinations can make each trip a unique experience.
+                    </p>
+
+                    <p class="paragraph-three">
+                        Choosing the right destination also depends on
+                        factors such as budget, weather, transportation,
+                        and available time. Researching a place before
+                        traveling can help people plan their activities
+                        and expenses. Good planning can make a vacation
+                        more comfortable and enjoyable.
+                    </p>
+                </div>
+            </section>
+
+            <!-- New interactive destination cards -->
+            <section class="content-card full-card destination-explorer">
+                <p class="section-label">Find Your Next Adventure</p>
+                <h2>Places Worth Exploring</h2>
+
+                <p class="explorer-description">
+                    Discover inspiring destinations around the world.
+                    Save your favorites to create your own travel wishlist.
+                </p>
+
+                <!-- Updated by destinations.js -->
+                <p
+                    id="destination-message"
+                    class="destination-message"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
+                <div class="destination-grid">
+
+                    <article class="destination-card">
+                        <div class="destination-photo san-francisco-photo"
+                             role="img"
+                             aria-label="San Francisco travel scenery">
+                            <span class="destination-tag">City Escape</span>
+                        </div>
+
+                        <div class="destination-card-content">
+                            <p class="destination-country">United States</p>
+                            <h3>San Francisco</h3>
+                            <p>
+                                Discover the Golden Gate Bridge,
+                                waterfront views, and colorful neighborhoods.
+                            </p>
+
+                            <button
+                                class="save-button"
+                                type="button"
+                                data-destination="san-francisco"
+                                aria-pressed="false"
+                            >
+                                ♡ Save to My Places
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="destination-card">
+                        <div class="destination-photo new-york-photo"
+                             role="img"
+                             aria-label="New York City skyline">
+                            <span class="destination-tag">Urban Adventure</span>
+                        </div>
+
+                        <div class="destination-card-content">
+                            <p class="destination-country">United States</p>
+                            <h3>New York City</h3>
+                            <p>
+                                Explore Central Park, world-famous
+                                museums, Broadway, and the city skyline.
+                            </p>
+
+                            <button
+                                class="save-button"
+                                type="button"
+                                data-destination="new-york"
+                                aria-pressed="false"
+                            >
+                                ♡ Save to My Places
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="destination-card">
+                        <div class="destination-photo paris-photo"
+                             role="img"
+                             aria-label="Paris travel scenery">
+                            <span class="destination-tag">Romantic Getaway</span>
+                        </div>
+
+                        <div class="destination-card-content">
+                            <p class="destination-country">France</p>
+                            <h3>Paris</h3>
+                            <p>
+                                Experience the Eiffel Tower, beautiful
+                                architecture, art, and charming cafés.
+                            </p>
+
+                            <button
+                                class="save-button"
+                                type="button"
+                                data-destination="paris"
+                                aria-pressed="false"
+                            >
+                                ♡ Save to My Places
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="destination-card">
+                        <div class="destination-photo tokyo-photo"
+                             role="img"
+                             aria-label="Tokyo travel scenery">
+                            <span class="destination-tag">Culture & Discovery</span>
+                        </div>
+
+                        <div class="destination-card-content">
+                            <p class="destination-country">Japan</p>
+                            <h3>Tokyo</h3>
+                            <p>
+                                Discover historic temples, exciting
+                                neighborhoods, technology, and local food.
+                            </p>
+
+                            <button
+                                class="save-button"
+                                type="button"
+                                data-destination="tokyo"
+                                aria-pressed="false"
+                            >
+                                ♡ Save to My Places
+                            </button>
+                        </div>
+                    </article>
+
+                </div>
+
+                <p class="wishlist-link">
+                    Already saved some favorites?
+                    <a href="/profile">View My Saved Places</a>
+                </p>
+            </section>
+
+            <!-- Original popular destinations list -->
+            <section class="content-card full-card">
+                <h2>Popular Travel Destinations</h2>
+
+                <ul class="destination-list">
+                    <li>San Francisco</li>
+                    <li>New York City</li>
+                    <li>Paris</li>
+                    <li>Tokyo</li>
+                </ul>
+            </section>
+
+            <!-- Original destination information table -->
+            <section class="content-card full-card">
+                <h2>Destination Information</h2>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Destination</th>
+                                <th>Country</th>
+                                <th>Known For</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>San Francisco</td>
+                                <td>United States</td>
+                                <td>Golden Gate Bridge</td>
+                            </tr>
+                            <tr>
+                                <td>Paris</td>
+                                <td>France</td>
+                                <td>Eiffel Tower</td>
+                            </tr>
+                            <tr>
+                                <td>Tokyo</td>
+                                <td>Japan</td>
+                                <td>Culture and Technology</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="footer">
+            <p>
+                Travel Adventures |
+                Explore the world one journey at a time.
+            </p>
+        </footer>
+
+    </div>
+</body>
+</html>

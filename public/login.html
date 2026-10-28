@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Back | Travel Adventures</title>
+
+    <link rel="stylesheet" href="/auth.css">
+    <link rel="stylesheet" href="/navigation.css">
+    <script src="/navigation.js" defer></script>
+</head>
+<body>
+
+    <!-- Shared website heading -->
+    <header class="auth-site-header">
+        <h1>Travel Adventures</h1>
+        <p>Explore. Experience. Remember.</p>
+    </header>
+
+    <!-- Navigation populated by navigation.js -->
+    <div id="site-navigation" class="auth-navigation-wrap"></div>
+
+    <main class="page">
+
+        <!-- Left side: travel photograph and welcome message -->
+        <section class="visual-panel">
+            <div class="logo">
+                <a href="/" style="color:inherit;text-decoration:none">
+                    Travel Adventures.
+                </a>
+            </div>
+
+            <div class="visual-copy">
+                <h2>The world is waiting for you.</h2>
+                <p>
+                    Every journey has a story. Pick up where
+                    you left off and keep exploring.
+                </p>
+            </div>
+
+            <div class="visual-footer">
+                Explore &nbsp;·&nbsp; Experience &nbsp;·&nbsp; Remember
+            </div>
+        </section>
+
+        <!-- Right side: login form -->
+        <section class="form-panel">
+            <div class="form-content">
+                <div class="eyebrow">Your journey continues</div>
+
+                <h1>Welcome back, explorer.</h1>
+
+                <p class="subtitle">
+                    Ready for your next adventure?
+                    Sign in to continue.
+                </p>
+
+                <!-- Submit credentials to the Express login endpoint -->
+                <form action="/login" method="POST">
+
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Enter your username"
+                            autocomplete="username"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+                    </div>
+
+                    <button class="primary-button" type="submit">
+                        Sign in
+                    </button>
+                </form>
+
+                <p class="switch-text">
+                    New to Travel Adventures?
+                    <a href="/register.html">Create an account</a>
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "travel-adventures-webapp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Travel Adventures website with Express, MySQL, and session-based authentication",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "mysql2": "^3.14.0"
+  }
+}

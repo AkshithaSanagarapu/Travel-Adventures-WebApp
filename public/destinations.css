@@ -1,0 +1,330 @@
+
+/* ==========================================
+   TRAVEL ADVENTURES - DESTINATION BOOKMARKS
+   ========================================== */
+
+/* Introduction above the destination cards */
+.destination-explorer {
+    padding: 38px;
+}
+
+.explorer-description {
+    max-width: 620px;
+    margin: 0 auto 25px;
+    color: #64716d;
+    line-height: 1.8;
+}
+
+/* Responsive grid of travel destination cards */
+.destination-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 26px;
+    text-align: left;
+}
+
+/* Individual destination card */
+.destination-card {
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e5e7df;
+    border-radius: 16px;
+    box-shadow: 0 8px 22px rgba(23, 76, 79, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.destination-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(23, 76, 79, 0.13);
+}
+
+/* Travel photographs at the top of cards */
+.destination-photo {
+    position: relative;
+    height: 220px;
+    background-color: #d9dfcf;
+    background-position: center;
+    background-size: cover;
+}
+
+.san-francisco-photo {
+    background-image: url(
+        "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=900&q=85"
+    );
+}
+
+.new-york-photo {
+    background-image: url(
+        "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=900&q=85"
+    );
+}
+
+.paris-photo {
+    background-image: url(
+        "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=900&q=85"
+    );
+}
+
+.tokyo-photo {
+    background-image: url(
+        "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=900&q=85"
+    );
+}
+
+/* Small category label over the image */
+.destination-tag {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    padding: 9px 13px;
+    border-radius: 20px;
+    background: rgba(248, 245, 238, 0.95);
+    color: #174c4f;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Text content inside destination cards */
+.destination-card-content {
+    padding: 25px;
+}
+
+.destination-country {
+    margin: 0 0 8px;
+    color: #287a8a;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+.destination-card-content h3 {
+    margin: 0 0 12px;
+    color: #174c4f;
+    font-family: Georgia, serif;
+    font-size: 25px;
+}
+
+.destination-card-content > p:not(.destination-country) {
+    min-height: 66px;
+    color: #65716d;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* Buttons used to save and remove bookmarks */
+.save-button,
+.remove-button,
+.travel-button {
+    display: inline-block;
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid #174c4f;
+    border-radius: 10px;
+    background: #174c4f;
+    color: #ffffff;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.save-button:hover,
+.travel-button:hover {
+    background: #287a8a;
+    transform: translateY(-1px);
+}
+
+.save-button.is-saved {
+    background: #e8c07d;
+    border-color: #e8c07d;
+    color: #174c4f;
+}
+
+.save-button.is-saved:hover {
+    background: #f0cf97;
+}
+
+.remove-button {
+    background: transparent;
+    color: #a6533e;
+    border-color: #d7a798;
+}
+
+.remove-button:hover {
+    background: #f9ebe6;
+}
+
+.save-button:disabled,
+.remove-button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+/* Feedback after saving or removing a destination */
+.destination-message {
+    color: #174c4f;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.destination-message:empty {
+    display: none;
+}
+
+.destination-message.message-error {
+    color: #a6533e;
+}
+
+.wishlist-link {
+    margin: 28px 0 0;
+    color: #65716d;
+    font-size: 14px;
+}
+
+.wishlist-link a {
+    color: #174c4f;
+    font-weight: 700;
+}
+
+/* ==========================================
+   PROFILE PAGE
+   ========================================== */
+
+.profile-intro {
+    padding: 42px 30px;
+}
+
+.profile-intro > p:not(.section-label) {
+    line-height: 1.8;
+}
+
+.profile-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 22px;
+    margin-top: 30px;
+}
+
+.profile-summary .travel-button {
+    width: auto;
+    min-width: 220px;
+}
+
+.profile-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    min-width: 180px;
+    padding: 15px 25px;
+    border-radius: 12px;
+    background: #f1f5ef;
+    color: #174c4f;
+}
+
+.profile-stat span:first-child {
+    font-family: Georgia, serif;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.profile-stat span:last-child {
+    font-size: 13px;
+}
+
+.saved-section {
+    padding: 38px;
+}
+
+.saved-section > p:not(.section-label) {
+    color: #65716d;
+    line-height: 1.7;
+}
+
+.saved-place-card .destination-photo {
+    height: 190px;
+}
+
+.empty-wishlist {
+    grid-column: 1 / -1;
+    padding: 45px 25px;
+    border: 1px dashed #b9c9c0;
+    border-radius: 14px;
+    background: #f7f9f5;
+    text-align: center;
+}
+
+.empty-wishlist h3 {
+    margin: 0 0 12px;
+    color: #174c4f;
+    font-family: Georgia, serif;
+    font-size: 25px;
+}
+
+.empty-wishlist p {
+    color: #65716d;
+    line-height: 1.7;
+}
+
+.empty-wishlist .travel-button {
+    width: auto;
+    margin-top: 12px;
+}
+
+.profile-actions {
+    margin: 0 0 32px;
+    text-align: center;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+@media (max-width: 760px) {
+    .destination-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .destination-explorer,
+    .saved-section {
+        padding: 26px 20px;
+    }
+
+    .destination-photo {
+        height: 240px;
+    }
+
+    .destination-card-content > p:not(.destination-country) {
+        min-height: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .destination-photo {
+        height: 190px;
+    }
+
+    .destination-card-content {
+        padding: 20px;
+    }
+
+    .destination-card-content h3 {
+        font-size: 23px;
+    }
+
+    .profile-summary {
+        flex-direction: column;
+    }
+
+    .profile-summary .travel-button {
+        width: 100%;
+    }
+}

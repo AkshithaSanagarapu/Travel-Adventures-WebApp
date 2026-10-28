@@ -1,0 +1,203 @@
+
+/* ==========================================
+   TRAVEL ADVENTURES - SHARED NAVIGATION
+   ========================================== */
+
+/* Website heading for Login and Register */
+.auth-site-header {
+    text-align: center;
+    padding: 34px 20px 20px;
+}
+
+.auth-site-header h1 {
+    color: #174c4f;
+    font: bold 46px Georgia, serif;
+    margin: 0 0 6px;
+}
+
+.auth-site-header p {
+    color: #287a8a;
+    font-size: 19px;
+    font-style: italic;
+    margin: 0;
+}
+
+/* ==========================================
+   SHARED NAVIGATION
+   ========================================== */
+
+.shared-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Username displayed after login */
+.nav-welcome {
+    color: #ffffff;
+    font-weight: 600;
+    padding: 10px 12px;
+    font-size: 14px;
+}
+
+/* Navigation wrapper for Login and Register */
+.auth-navigation-wrap {
+    position: relative;
+    z-index: 5;
+    background: #f8f5ee;
+    padding: 0 20px;
+}
+
+.auth-navigation-wrap .navigation {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.auth-navigation-wrap .shared-navigation {
+    background: #174c4f;
+    border-radius: 12px;
+    padding: 12px 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.auth-navigation-wrap .shared-navigation a {
+    color: #ffffff;
+    padding: 11px 16px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: background 0.2s ease;
+}
+
+.auth-navigation-wrap .shared-navigation a:hover {
+    background: rgba(255, 255, 255, 0.14);
+}
+
+/* Highlight the current page */
+.auth-navigation-wrap .shared-navigation a.active {
+    color: #174c4f;
+    background: #e8bd74;
+}
+
+/* ==========================================
+   LOGIN AND REGISTER PAGE LAYOUT
+   ========================================== */
+
+/* Match the width of the other travel pages */
+.auth-navigation-wrap + .page {
+    width: calc(100% - 40px);
+    max-width: 1180px;
+    height: 560px;
+    min-height: 0;
+    margin: 26px auto 28px;
+    overflow: hidden;
+    border-radius: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Keep the photograph within the card */
+.auth-navigation-wrap + .page .visual-panel {
+    height: 100%;
+    min-height: 0;
+    padding: 36px;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+/* Adjust the image-side heading */
+.auth-navigation-wrap + .page .visual-copy h2 {
+    font-size: clamp(34px, 3.4vw, 50px);
+}
+
+/* Form area */
+.auth-navigation-wrap + .page .form-panel {
+    padding: 44px 36px;
+    min-height: 0;
+}
+
+.auth-navigation-wrap + .page .form-content {
+    max-width: 420px;
+}
+
+/* ==========================================
+   PROFILE PAGE
+   ========================================== */
+
+/* Styled Logout button */
+.profile-logout {
+    display: inline-block;
+    margin-top: 18px;
+    background: #174c4f;
+    color: #ffffff !important;
+    padding: 13px 24px;
+    border-radius: 9px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.profile-logout:hover {
+    background: #246467;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+/* Tablet */
+@media (max-width: 800px) {
+    .auth-navigation-wrap + .page {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .auth-navigation-wrap + .page .visual-panel {
+        height: 260px;
+        min-height: 260px;
+        padding: 26px;
+    }
+
+    .auth-navigation-wrap + .page .form-panel {
+        padding: 45px 24px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+    .auth-site-header {
+        padding: 24px 10px 16px;
+    }
+
+    .auth-site-header h1 {
+        font-size: 34px;
+    }
+
+    .auth-site-header p {
+        font-size: 15px;
+    }
+
+    .auth-navigation-wrap {
+        padding: 0 8px;
+    }
+
+    .auth-navigation-wrap .shared-navigation a {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .nav-welcome {
+        font-size: 12px;
+    }
+
+    .auth-navigation-wrap + .page {
+        width: calc(100% - 16px);
+        margin: 8px auto 16px;
+    }
+}
